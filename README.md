@@ -1,6 +1,6 @@
 # forecastapp
 
-A new Flutter project.
+Weather simple app. (Flutter + TDD + Riverpod) 
 
 ## Getting Started
 
