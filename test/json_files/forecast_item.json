@@ -1,0 +1,44 @@
+{
+  "consolidated_weather": [
+    {
+      "id": 6252481974632448,
+      "weather_state_name": "Heavy Cloud",
+      "weather_state_abbr": "hc",
+      "wind_direction_compass": "E",
+      "created": "2021-08-24T14:33:07.964603Z",
+      "applicable_date": "2021-08-24",
+      "min_temp": 14.56,
+      "max_temp": 27.435000000000002,
+      "the_temp": 25.96,
+      "wind_speed": 2.9785608048993875,
+      "wind_direction": 82.5,
+      "air_pressure": 1019.0,
+      "humidity": 33,
+      "visibility": 9.999726596675416,
+      "predictability": 71
+    }
+  ],
+  "time": "2021-08-24T17:44:12.508764+03:00",
+  "sun_rise": "2021-08-24T05:38:11.963607+03:00",
+  "sun_set": "2021-08-24T19:35:36.249847+03:00",
+  "timezone_name": "LMT",
+  "parent": {
+    "title": "Ukraine",
+    "location_type": "Country",
+    "woeid": 23424976,
+    "latt_long": "48.382881,31.173441"
+  },
+  "sources": [
+    {
+      "title": "BBC",
+      "slug": "bbc",
+      "url": "http://www.bbc.co.uk/weather/",
+      "crawl_rate": 360
+    }
+  ],
+  "title": "Kharkiv",
+  "location_type": "City",
+  "woeid": 922137,
+  "latt_long": "49.990101,36.230301",
+  "timezone": "Europe/Kiev"
+}

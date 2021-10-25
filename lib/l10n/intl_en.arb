@@ -1,0 +1,14 @@
+{
+  "page_title_forecast": "Forecast Page",
+  "page_title_location_search": "Location Search",
+  "error_message_no_view_state": "No view for state:",
+  "suffix_wind_speed": "mph",
+  "suffix_pressure": "mb",
+  "suffix_path_visibility": "miles",
+  "suffix_path_humidity": "%",
+  "temperature_max": "Max:",
+  "temperature_min": "Min:",
+  "hint_text_input_location_search": "Input location name",
+  "message_information_page": "Empty result found",
+  "error_loading_weather_data": "Error loading weather data"
+}
