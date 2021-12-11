@@ -14,10 +14,11 @@ import '../../../../all_test.mocks.dart';
 main() {
   late LocationSearchDataProvider dataProvider;
   late MockLocationSearchServiceImpl mockService;
-  const tModel = LocationSearchModel(
+  final tModel = LocationSearchModel(
     title: 'Kharkiv',
     locationType: 'City',
     woeid: 123,
+    isFavorite: false,
   );
   const query = 'kharkiv';
   final tListModels = [tModel];

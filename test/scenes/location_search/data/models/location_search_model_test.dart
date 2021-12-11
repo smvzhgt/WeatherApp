@@ -8,10 +8,11 @@ import '../../../../json_files/local_json_reader.dart';
 
 main() {
   group('LocationSearchModel', () {
-    const tLocationSearchModel = LocationSearchModel(
+    final tLocationSearchModel = LocationSearchModel(
       title: 'Kharkiv',
       locationType: 'City',
       woeid: 922137,
+      isFavorite: false,
     );
 
     test('Should be a right type', () async {

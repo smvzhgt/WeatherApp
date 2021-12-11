@@ -30,6 +30,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Input location name"),
         "message_information_page":
             MessageLookupByLibrary.simpleMessage("Empty result found"),
+        "no_favorite_message_information_page":
+            MessageLookupByLibrary.simpleMessage("Favorite location not found"),
+        "page_title_favorite_location":
+            MessageLookupByLibrary.simpleMessage("Favorite Location"),
         "page_title_forecast":
             MessageLookupByLibrary.simpleMessage("Forecast Page"),
         "page_title_location_search":

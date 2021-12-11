@@ -5,16 +5,18 @@ import 'package:forecastapp/scenes/location_search/presentation/widgets/location
 
 void main() {
   testWidgets('LocationSearchRowItem', (WidgetTester tester) async {
-    const entity = LocationSearch(
+    final entity = LocationSearch(
       title: 'Test',
       locationType: 'City',
       woeid: 0,
+      isFavorite: false,
     );
+    void onClickButton(LocationSearch entity) {}
     await tester.pumpWidget(
-      const MaterialApp(
+      MaterialApp(
         home: Scaffold(
-          body: LocationSearchRowItem(entity: entity),
-        ),
+            body: LocationSearchRowItem(
+                entity: entity, onClickButton: onClickButton)),
       ),
     );
 

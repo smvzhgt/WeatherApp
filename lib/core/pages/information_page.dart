@@ -14,7 +14,7 @@ class InformationPage extends StatelessWidget {
       style: TextStyle(
         fontSize: 30.0,
         fontWeight: FontWeight.bold,
-        color: Theme.of(context).secondaryHeaderColor,
+        color: Theme.of(context).primaryColor,
       ),
     );
   }

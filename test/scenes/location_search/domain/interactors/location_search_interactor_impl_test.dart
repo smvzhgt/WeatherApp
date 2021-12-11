@@ -9,10 +9,11 @@ import '../../../../all_test.mocks.dart';
 main() {
   late LocationSearchInteractorImpl interactor;
   late MockLocationSearchDataProvider dataProvider;
-  const tEntity = LocationSearch(
+  final tEntity = LocationSearch(
     title: 'Moscow',
     locationType: 'City',
     woeid: 12345,
+    isFavorite: false,
   );
   final tListEntities = [tEntity];
   const query = 'kharkiv';

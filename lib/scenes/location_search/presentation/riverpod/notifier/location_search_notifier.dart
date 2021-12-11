@@ -24,4 +24,23 @@ class LocationSearchNotifier extends StateNotifier<WeatherState> {
       state = const LocationSearchErrorState();
     }
   }
+
+  // TODO: change return type from LocationSearch to int
+  Future<void> setFavoriteLocationSearch({
+    required LocationSearch location,
+  }) async {
+    final either = await interactor.saveLocationSearch(location: location);
+    if (either.isLeft()) {
+      state = const LocationSearchErrorState();
+    }
+  }
+
+  Future<void> unsetFavoriteLocationSearch({
+    required LocationSearch location,
+  }) async {
+    final either = await interactor.deleteLocationSearch(location: location);
+    if (either.isLeft()) {
+      state = const LocationSearchErrorState();
+    }
+  }
 }

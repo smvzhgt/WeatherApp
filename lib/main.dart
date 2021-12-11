@@ -6,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme.dart';
 import 'di/injection.dart' as di;
 import 'generated/l10n.dart';
+import 'scenes/bottom_navigation/bottom_navigation_page.dart';
 import 'scenes/location/presentation/pages/location_page.dart';
-import 'scenes/location_search/presentation/pages/location_search_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +19,7 @@ Future<void> main() async {
 class ForecastApp extends StatelessWidget {
   final AdaptiveThemeMode? savedThemeMode;
 
-  const ForecastApp({
+  ForecastApp({
     Key? key,
     this.savedThemeMode,
   }) : super(key: key);
@@ -42,14 +42,18 @@ class ForecastApp extends StatelessWidget {
         theme: light,
         darkTheme: dark,
         debugShowCheckedModeBanner: false,
-        initialRoute: LocationSearchPage.routeName,
-        routes: {
-          LocationSearchPage.routeName: (context) =>
-              const ProviderScope(child: LocationSearchPage()),
-          LocationPage.routeName: (context) =>
-              const ProviderScope(child: LocationPage())
-        },
+        initialRoute: BottomNavigationPage.routeName,
+        routes: _routes,
       ),
     );
   }
+
+  final Map<String, Widget Function(BuildContext)> _routes = {
+    BottomNavigationPage.routeName: (context) => const ProviderScope(
+          child: BottomNavigationPage(),
+        ),
+    LocationPage.routeName: (context) => const ProviderScope(
+          child: LocationPage(),
+        )
+  };
 }

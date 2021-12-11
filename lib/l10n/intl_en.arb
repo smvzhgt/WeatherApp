@@ -1,6 +1,7 @@
 {
   "page_title_forecast": "Forecast Page",
   "page_title_location_search": "Location Search",
+  "page_title_favorite_location": "Favorite Location",
   "error_message_no_view_state": "No view for state:",
   "suffix_wind_speed": "mph",
   "suffix_pressure": "mb",
@@ -10,5 +11,6 @@
   "temperature_min": "Min:",
   "hint_text_input_location_search": "Input location name",
   "message_information_page": "Empty result found",
+  "no_favorite_message_information_page": "Favorite location not found",
   "error_loading_weather_data": "Error loading weather data"
 }

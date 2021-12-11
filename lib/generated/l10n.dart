@@ -70,6 +70,16 @@ class S {
     );
   }
 
+  /// `Favorite Location`
+  String get page_title_favorite_location {
+    return Intl.message(
+      'Favorite Location',
+      name: 'page_title_favorite_location',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No view for state:`
   String get error_message_no_view_state {
     return Intl.message(
@@ -155,6 +165,16 @@ class S {
     return Intl.message(
       'Empty result found',
       name: 'message_information_page',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorite location not found`
+  String get no_favorite_message_information_page {
+    return Intl.message(
+      'Favorite location not found',
+      name: 'no_favorite_message_information_page',
       desc: '',
       args: [],
     );

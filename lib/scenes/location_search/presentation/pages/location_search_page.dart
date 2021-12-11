@@ -14,7 +14,7 @@ import '../riverpod/state/location_search_state.dart';
 import '../widgets/location_search_row_item.dart';
 
 class LocationSearchPage extends StatefulWidget {
-  static const routeName = "/";
+  static const routeName = "locationSearch";
 
   const LocationSearchPage({
     Key? key,
@@ -114,9 +114,7 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
   }
 
   Widget _buildState(WeatherState state) {
-    if (state is LocationSearchInitialState) {
-      return const EmptyPage();
-    } else if (state is LocationSearchLoadingState) {
+    if (state is LocationSearchLoadingState) {
       return const LoadingPage();
     } else if (state is LocationSearchLoadedState) {
       final entities = state.models;
@@ -134,13 +132,26 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
     }
   }
 
-  Widget _buildList(List<LocationSearch> entities) {
+  Widget _buildList(List<LocationSearch> locations) {
     return ListView.separated(
-      itemCount: entities.length,
+      itemCount: locations.length,
       itemBuilder: (BuildContext context, int index) {
-        return LocationSearchRowItem(entity: entities[index]);
+        return LocationSearchRowItem(
+            entity: locations[index], onClickButton: _onClickButton);
       },
       separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
+  }
+
+  void _onClickButton(LocationSearch location) {
+    if (location.isFavorite) {
+      context
+          .read(locationSearchNotifierProvider.notifier)
+          .unsetFavoriteLocationSearch(location: location);
+    } else {
+      context
+          .read(locationSearchNotifierProvider.notifier)
+          .setFavoriteLocationSearch(location: location);
+    }
   }
 }

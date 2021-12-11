@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:forecastapp/scenes/location_search/data/models/location_search_model.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failure.dart';
@@ -26,6 +27,32 @@ class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
       return Left(ServerFailure());
     } on SocketException {
       return Left(SocketFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, LocationSearch>> saveLocationSearch(
+    LocationSearch location,
+  ) async {
+    try {
+      final model = location as LocationSearchModel;
+      final result = await service.saveLocationSearch(model);
+      return Right(result);
+    } on DataBaseException {
+      return Left(DataBaseFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> deleteLocationSearch(
+    LocationSearch location,
+  ) async {
+    try {
+      final model = location as LocationSearchModel;
+      final result = await service.deleteLocationSearch(model);
+      return Right(result);
+    } on DataBaseException {
+      return Left(DataBaseFailure());
     }
   }
 }

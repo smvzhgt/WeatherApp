@@ -1,6 +1,7 @@
-import 'package:forecastapp/scenes/location_search/data/models/location_search_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../scenes/location_search/data/models/location_search_model.dart';
 
 class DataBaseClient {
   static final DataBaseClient instance = DataBaseClient._init();
@@ -22,16 +23,18 @@ class DataBaseClient {
   }
 
   Future _createDB(Database db, int version) async {
-    const idType = "INTEGER PRIMARY KEY AUTOINCREMENT";
+    const idType = "INTEGER NOT NULL";
     const integerType = "INTEGER NOT NULL";
     const textType = "TEXT NOT NULL";
+    const boolType = "BOOLEAN NOT NULL";
 
     const sql = '''
       CREATE TABLE ${LocationSearchFields.tableName} (
         ${LocationSearchFields.id} $idType,
         ${LocationSearchFields.title} $textType,
         ${LocationSearchFields.locationType} $textType,
-        ${LocationSearchFields.woeid} $integerType
+        ${LocationSearchFields.woeid} $integerType,
+        ${LocationSearchFields.isFavorite} $boolType
       )
     ''';
     await db.execute(sql);

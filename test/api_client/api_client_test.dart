@@ -73,11 +73,14 @@ void main() async {
   group('ApiClient', () {
     group('LocationSearch', () {
       test('should return LocationSearchModel type', () async {
-        const model = LocationSearchModel(
-          title: '',
-          locationType: '',
-          woeid: 0,
+        final model = LocationSearchModel(
+            id: 0,
+            title: "",
+            locationType: "",
+            woeid: 0,
+            isFavorite: false
         );
+
         const query = 'kharkiv';
 
         when(mockApiClient.fetchEarthID(query))

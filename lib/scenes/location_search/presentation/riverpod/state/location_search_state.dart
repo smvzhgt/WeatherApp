@@ -28,6 +28,25 @@ class LocationSearchLoadedState extends WeatherState with EquatableMixin {
   List<Object?> get props => [models];
 }
 
+class LocationSearchSetFavoriteLoadingState extends WeatherState with EquatableMixin {
+
+  const LocationSearchSetFavoriteLoadingState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class LocationSearchSetFavoriteState extends WeatherState with EquatableMixin {
+  final int index;
+
+  const LocationSearchSetFavoriteState({
+    required this.index,
+  });
+
+  @override
+  List<Object?> get props => [index];
+}
+
 class LocationSearchErrorState extends WeatherState with EquatableMixin {
   const LocationSearchErrorState();
 

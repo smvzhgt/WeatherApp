@@ -7,4 +7,12 @@ abstract class LocationSearchDataProvider {
   Future<Either<Failure, List<LocationSearch>>> fetchEarthID(
     String query,
   );
+
+  Future<Either<Failure, LocationSearch>> saveLocationSearch(
+    LocationSearch location,
+  );
+
+  Future<Either<Failure, int>> deleteLocationSearch(
+    LocationSearch location,
+  );
 }
