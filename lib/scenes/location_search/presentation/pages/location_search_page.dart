@@ -59,7 +59,7 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
             Expanded(
               child: Center(
                 child: Consumer(builder: (context, watch, child) {
-                  final state = watch(locationSearchNotifierProvider);
+                  final state = watch(lsNotifierProvider);
                   return _buildState(state);
                 }),
               ),
@@ -80,7 +80,7 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
   void _onPressedButton(String value) {
     controller.clear();
     context
-        .read(locationSearchNotifierProvider.notifier)
+        .read(lsNotifierProvider.notifier)
         .fetchEarthID(query: _query);
   }
 
@@ -146,11 +146,11 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
   void _onClickButton(LocationSearch location) {
     if (location.isFavorite) {
       context
-          .read(locationSearchNotifierProvider.notifier)
+          .read(lsNotifierProvider.notifier)
           .unsetFavoriteLocationSearch(location: location);
     } else {
       context
-          .read(locationSearchNotifierProvider.notifier)
+          .read(lsNotifierProvider.notifier)
           .setFavoriteLocationSearch(location: location);
     }
   }

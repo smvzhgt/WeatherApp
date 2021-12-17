@@ -6,15 +6,15 @@ import '../../../../../di/injection.dart';
 import '../../../domain/interactors/location_search_interactor_impl.dart';
 import '../notifier/location_search_notifier.dart';
 
-final locationSearchInteractorProvider = Provider<LocationSearchInteractor>(
+final lsInteractorProvider = Provider<LocationSearchInteractor>(
   (ref) => LocationSearchInteractorImpl(
     dataProvider: sl<LocationSearchDataProvider>(),
   ),
 );
 
-final locationSearchNotifierProvider =
+final lsNotifierProvider =
     StateNotifierProvider<LocationSearchNotifier, WeatherState>(
   (ref) => LocationSearchNotifier(
-    ref.watch(locationSearchInteractorProvider),
+    ref.watch(lsInteractorProvider),
   ),
 );
