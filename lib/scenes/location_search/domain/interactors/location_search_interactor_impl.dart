@@ -9,11 +9,11 @@ abstract class LocationSearchInteractor {
     required String query,
   });
 
-  Future<Either<Failure, LocationSearch>> saveLocationSearch({
+  Future<Either<Failure, List<LocationSearch>>> saveLocationSearch({
     required LocationSearch location,
   });
 
-  Future<Either<Failure, int>> deleteLocationSearch({
+  Future<Either<Failure, List<LocationSearch>>> deleteLocationSearch({
     required LocationSearch location,
   });
 }
@@ -33,14 +33,14 @@ class LocationSearchInteractorImpl implements LocationSearchInteractor {
   }
 
   @override
-  Future<Either<Failure, LocationSearch>> saveLocationSearch({
+  Future<Either<Failure, List<LocationSearch>>> saveLocationSearch({
     required LocationSearch location,
   }) async {
     return await dataProvider.saveLocationSearch(location);
   }
 
   @override
-  Future<Either<Failure, int>> deleteLocationSearch({
+  Future<Either<Failure, List<LocationSearch>>> deleteLocationSearch({
     required LocationSearch location,
   }) async {
     return await dataProvider.deleteLocationSearch(location);

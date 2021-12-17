@@ -22,9 +22,6 @@ class _FavoriteButtonWidgetState extends State<FavoriteButtonWidget> {
     return IconButton(
       onPressed: () {
         widget.onClickButton(widget.entity);
-        setState(() {
-          widget.entity.isFavorite = !widget.entity.isFavorite;
-        });
       },
       icon: widget.entity.isFavorite
           ? const Icon(Icons.star)

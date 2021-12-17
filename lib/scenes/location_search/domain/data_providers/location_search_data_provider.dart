@@ -8,11 +8,11 @@ abstract class LocationSearchDataProvider {
     String query,
   );
 
-  Future<Either<Failure, LocationSearch>> saveLocationSearch(
-    LocationSearch location,
+  Future<Either<Failure, List<LocationSearch>>> saveLocationSearch(
+    LocationSearch locations,
   );
 
-  Future<Either<Failure, int>> deleteLocationSearch(
+  Future<Either<Failure, List<LocationSearch>>> deleteLocationSearch(
     LocationSearch location,
   );
 }

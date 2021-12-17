@@ -13,7 +13,7 @@ final lsInteractorProvider = Provider<LocationSearchInteractor>(
 );
 
 final lsNotifierProvider =
-    StateNotifierProvider<LocationSearchNotifier, WeatherState>(
+    StateNotifierProvider.autoDispose<LocationSearchNotifier, WeatherState>(
   (ref) => LocationSearchNotifier(
     ref.watch(lsInteractorProvider),
   ),

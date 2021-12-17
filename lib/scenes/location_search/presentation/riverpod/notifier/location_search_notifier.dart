@@ -30,7 +30,10 @@ class LocationSearchNotifier extends StateNotifier<WeatherState> {
     required LocationSearch location,
   }) async {
     final either = await interactor.saveLocationSearch(location: location);
-    if (either.isLeft()) {
+    if (either.isRight()) {
+      final models = either.getOrElse(() => List<LocationSearch>.empty());
+      state = LocationSearchLoadedState(models: models);
+    } else {
       state = const LocationSearchErrorState();
     }
   }
@@ -39,7 +42,10 @@ class LocationSearchNotifier extends StateNotifier<WeatherState> {
     required LocationSearch location,
   }) async {
     final either = await interactor.deleteLocationSearch(location: location);
-    if (either.isLeft()) {
+    if (either.isRight()) {
+      final models = either.getOrElse(() => List<LocationSearch>.empty());
+      state = LocationSearchLoadedState(models: models);
+    } else {
       state = const LocationSearchErrorState();
     }
   }

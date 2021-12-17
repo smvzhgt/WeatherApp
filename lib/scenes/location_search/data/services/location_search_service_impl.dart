@@ -11,6 +11,9 @@ abstract class LocationSearchService {
   Future<int> deleteLocationSearch(
     LocationSearchModel location,
   );
+  Future<LocationSearchModel?> readLocationSearch(
+    LocationSearchModel location,
+  );
 }
 
 class LocationSearchServiceImpl implements LocationSearchService {
@@ -42,5 +45,13 @@ class LocationSearchServiceImpl implements LocationSearchService {
   ) async {
     final id = location.id ?? 0;
     return await dataBaseClient.delete(id);
+  }
+
+  @override
+  Future<LocationSearchModel?> readLocationSearch(
+    LocationSearchModel location,
+  ) async {
+    final id = location.id ?? 0;
+    return await dataBaseClient.read(id);
   }
 }

@@ -47,6 +47,11 @@ class LocationSearchModel extends LocationSearch {
         woeid: woeid ?? this.woeid,
         isFavorite: isFavorite ?? this.isFavorite,
       );
+
+  @override
+  LocationSearchModel toggle() {
+    return copy(isFavorite: !isFavorite);
+  }
 }
 
 // Data base

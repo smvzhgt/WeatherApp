@@ -28,4 +28,8 @@ class LocationSearch implements EquatableMixin {
 
   @override
   bool? get stringify => null;
+
+  LocationSearch toggle() {
+    return LocationSearch.empty(isFavorite: !isFavorite);
+  }
 }
