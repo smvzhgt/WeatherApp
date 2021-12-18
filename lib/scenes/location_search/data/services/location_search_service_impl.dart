@@ -43,7 +43,7 @@ class LocationSearchServiceImpl implements LocationSearchService {
   Future<int> deleteLocationSearch(
     LocationSearchModel location,
   ) async {
-    final id = location.id ?? 0;
+    final id = location.woeid;
     return await dataBaseClient.delete(id);
   }
 
@@ -51,7 +51,7 @@ class LocationSearchServiceImpl implements LocationSearchService {
   Future<LocationSearchModel?> readLocationSearch(
     LocationSearchModel location,
   ) async {
-    final id = location.id ?? 0;
+    final id = location.woeid;
     return await dataBaseClient.read(id);
   }
 }

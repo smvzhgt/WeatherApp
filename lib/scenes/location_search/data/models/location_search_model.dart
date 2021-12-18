@@ -17,7 +17,6 @@ class LocationSearchModel extends LocationSearch {
 
   factory LocationSearchModel.fromJson(Map<String, dynamic> json) {
     return LocationSearchModel(
-        id: (json['id'] ?? 0) as int,
         title: json['title'] as String,
         locationType: json['location_type'] as String,
         woeid: json['woeid'] as int,
@@ -25,7 +24,6 @@ class LocationSearchModel extends LocationSearch {
   }
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'id': id ?? 0,
       'title': title,
       'location_type': locationType,
       'woeid': woeid,
@@ -65,7 +63,7 @@ class LocationSearchFields {
     isFavorite
   ];
 
-  static const String id = "id";
+  static const String id = "_id";
   static const String title = "title";
   static const String locationType = "location_type";
   static const String woeid = "woeid";

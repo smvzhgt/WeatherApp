@@ -23,7 +23,7 @@ class DataBaseClient {
   }
 
   Future _createDB(Database db, int version) async {
-    const idType = "INTEGER NOT NULL";
+    const idType = "INTEGER PRIMARY KEY AUTOINCREMENT";
     const integerType = "INTEGER NOT NULL";
     const textType = "TEXT NOT NULL";
     const boolType = "BOOLEAN NOT NULL";
@@ -47,13 +47,13 @@ class DataBaseClient {
     return model.copy(id: id);
   }
 
-  Future<LocationSearchModel?> read(int id) async {
+  Future<LocationSearchModel?> read(int woeid) async {
     final db = await instance.database;
     final maps = await db.query(
       LocationSearchFields.tableName,
       columns: LocationSearchFields.values,
-      where: "${LocationSearchFields.id} = ?",
-      whereArgs: [id],
+      where: "${LocationSearchFields.woeid} = ?",
+      whereArgs: [woeid],
     );
 
     // TODO: add exception if maps is empty
@@ -77,17 +77,17 @@ class DataBaseClient {
     return db.update(
       LocationSearchFields.tableName,
       model.toJson(),
-      where: "${LocationSearchFields.id} = ?",
-      whereArgs: [model.id],
+      where: "${LocationSearchFields.woeid} = ?",
+      whereArgs: [model.woeid],
     );
   }
 
-  Future<int> delete(int id) async {
+  Future<int> delete(int woeid) async {
     final db = await instance.database;
     return db.delete(
       LocationSearchFields.tableName,
-      where: "${LocationSearchFields.id} = ?",
-      whereArgs: [id],
+      where: "${LocationSearchFields.woeid} = ?",
+      whereArgs: [woeid],
     );
   }
 
