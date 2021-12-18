@@ -21,7 +21,7 @@ class FavoriteServiceImpl implements FavoriteService {
 
   @override
   Future<int> deleteLocationSearch(LocationSearch location) async {
-    final id = location.id ?? 0;
+    final id = location.woeid;
     return await dataBaseClient.delete(id);
   }
 }
