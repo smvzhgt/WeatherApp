@@ -1,3 +1,4 @@
+import 'package:forecastapp/scenes/location_search/data/data_providers/LocationSearchCache.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,12 +30,15 @@ void init() {
 
   // DataProvider
   sl.registerLazySingleton<LocationSearchDataProvider>(
-      () => LocationSearchDataProviderImpl(service: sl()));
+      () => LocationSearchDataProviderImpl(service: sl(), cache: sl()));
 
   // Interactor
   sl.registerLazySingleton<LocationSearchInteractor>(
       () => LocationSearchInteractorImpl(dataProvider: sl()));
 
+  // Cache
+  sl.registerLazySingleton<LocationSearchCache>(
+      () => LocationSearchCacheImpl());
 
   //
   // Location
@@ -68,11 +72,11 @@ void init() {
 
   // DataProvider
   sl.registerLazySingleton<FavoriteDataProvider>(
-          () => FavoriteDataProviderImpl(service: sl()));
+      () => FavoriteDataProviderImpl(service: sl()));
 
   // Interactor
   sl.registerLazySingleton<FavoriteInteractor>(
-          () => FavoriteInteractorImpl(dataProvider: sl()));
+      () => FavoriteInteractorImpl(dataProvider: sl()));
 
   // DataBase client
   sl.registerSingleton<DataBaseClient>(DataBaseClient.instance);
