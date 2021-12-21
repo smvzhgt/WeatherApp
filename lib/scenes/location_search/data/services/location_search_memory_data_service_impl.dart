@@ -1,13 +1,14 @@
 import '../models/location_search_model.dart';
 
-abstract class LocationSearchCache {
+abstract class LocationSearchMemoryDataService {
   void cacheLocations(List<LocationSearchModel> locationModels);
   List<LocationSearchModel> getLocations();
   void updateLocation(LocationSearchModel locationModel);
 }
 
-class LocationSearchCacheImpl implements LocationSearchCache {
-  LocationSearchCacheImpl() : cachedLocations = [];
+class LocationSearchMemoryDataServiceImpl
+    implements LocationSearchMemoryDataService {
+  LocationSearchMemoryDataServiceImpl() : cachedLocations = [];
 
   List<LocationSearchModel> cachedLocations;
 

@@ -1,16 +1,16 @@
 import '../../../../api_client/api_client.dart';
 import '../models/forecast_model.dart';
 
-abstract class LocationService {
+abstract class LocationRemoteDataService {
   Future<ForecastModel> fetchForecastData(
     int earthID,
   );
 }
 
-class LocationServiceImpl implements LocationService {
+class LocationRemoteDataServiceImpl implements LocationRemoteDataService {
   final ApiClient apiClient;
 
-  LocationServiceImpl({
+  LocationRemoteDataServiceImpl({
     required this.apiClient,
   });
 

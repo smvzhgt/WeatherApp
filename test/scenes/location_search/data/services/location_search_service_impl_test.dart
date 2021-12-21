@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forecastapp/db/data_base_client.dart';
 import 'package:forecastapp/scenes/location_search/data/models/location_search_model.dart';
-import 'package:forecastapp/scenes/location_search/data/services/location_search_service_impl.dart';
+import 'package:forecastapp/scenes/location_search/data/services/location_search_remote_data_service_impl.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../../all_test.mocks.dart';
@@ -9,7 +9,7 @@ import '../../../../all_test.mocks.dart';
 main() {
   group('Location Search Service', () {
     late MockApiClientImpl mockApiClient;
-    late LocationSearchService service;
+    late LocationSearchRemoteDataService service;
     late DataBaseClient dataBaseClient;
     final tModel = LocationSearchModel(
       title: 'Kharkiv',
@@ -23,7 +23,7 @@ main() {
     setUp(() {
       dataBaseClient = DataBaseClient.instance;
       mockApiClient = MockApiClientImpl();
-      service = LocationSearchServiceImpl(
+      service = LocationSearchRemoteDataServiceImpl(
           apiClient: mockApiClient, dataBaseClient: dataBaseClient);
     });
 

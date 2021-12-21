@@ -2,15 +2,15 @@ import '../../../../db/data_base_client.dart';
 
 import '../../../location_search/domain/entities/location_search_entity.dart';
 
-abstract class FavoriteService {
+abstract class FavoriteLocalDataService {
   Future<List<LocationSearch>> loadSearchLocations();
   Future<int> deleteLocationSearch(LocationSearch location);
 }
 
-class FavoriteServiceImpl implements FavoriteService {
+class FavoriteLocalDataServiceImpl implements FavoriteLocalDataService {
   final DataBaseClient dataBaseClient;
 
-  FavoriteServiceImpl({
+  FavoriteLocalDataServiceImpl({
     required this.dataBaseClient,
   });
 

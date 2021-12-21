@@ -25,7 +25,7 @@ main() {
 
   setUp(() {
     mockService = MockLocationSearchServiceImpl();
-    dataProvider = LocationSearchDataProviderImpl(service: mockService);
+    dataProvider = LocationSearchDataProviderImpl(remoteDataService: mockService);
   });
 
   group('LocationSearchDataProviderImpl', () {

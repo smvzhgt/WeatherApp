@@ -7,16 +7,19 @@ import '../../../../core/error/failure.dart';
 import '../../domain/data_providers/location_search_data_provider.dart';
 import '../../domain/entities/location_search_entity.dart';
 import '../models/location_search_model.dart';
-import '../services/location_search_service_impl.dart';
-import 'LocationSearchCache.dart';
+import '../services/location_search_local_data_service_impl.dart';
+import '../services/location_search_memory_data_service_impl.dart';
+import '../services/location_search_remote_data_service_impl.dart';
 
 class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
-  LocationSearchService service;
-  LocationSearchCache cache;
+  LocationSearchRemoteDataService remoteDataService;
+  LocationSearchLocalDataService localDataService;
+  LocationSearchMemoryDataService memoryDataService;
 
   LocationSearchDataProviderImpl({
-    required this.service,
-    required this.cache,
+    required this.remoteDataService,
+    required this.localDataService,
+    required this.memoryDataService,
   });
 
   @override
@@ -24,15 +27,15 @@ class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
     String query,
   ) async {
     try {
-      final result = await service.fetchEarthID(query);
-      cache.cacheLocations(result);
+      final result = await remoteDataService.fetchEarthID(query);
+      memoryDataService.cacheLocations(result);
       for (final model in result) {
-        final savedModel = await service.readLocationSearch(model);
+        final savedModel = await localDataService.readLocationSearch(model);
         if (savedModel != null) {
-          cache.updateLocation(savedModel);
+          memoryDataService.updateLocation(savedModel);
         }
       }
-      return Right(cache.getLocations());
+      return Right(memoryDataService.getLocations());
     } on ServerException {
       return Left(ServerFailure());
     } on SocketException {
@@ -47,12 +50,12 @@ class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
     try {
       final locationToSave = location.toggle();
       final modelToSave = locationToSave as LocationSearchModel;
-      final savedModel = await service.readLocationSearch(modelToSave);
+      final savedModel = await localDataService.readLocationSearch(modelToSave);
       if (savedModel == null) {
-        final result = await service.saveLocationSearch(modelToSave);
-        cache.updateLocation(result);
+        final result = await localDataService.saveLocationSearch(modelToSave);
+        memoryDataService.updateLocation(result);
       }
-      return Right(cache.getLocations());
+      return Right(memoryDataService.getLocations());
     } on DataBaseException {
       return Left(DataBaseFailure());
     }
@@ -64,12 +67,12 @@ class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
   ) async {
     try {
       final modelToDelete = location as LocationSearchModel;
-      final result = await service.deleteLocationSearch(modelToDelete);
+      final result = await localDataService.deleteLocationSearch(modelToDelete);
       if (result > 0) {
         final model = modelToDelete.toggle();
-        cache.updateLocation(model);
+        memoryDataService.updateLocation(model);
       }
-      return Right(cache.getLocations());
+      return Right(memoryDataService.getLocations());
     } on DataBaseException {
       return Left(DataBaseFailure());
     }

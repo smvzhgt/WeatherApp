@@ -1,10 +1,8 @@
 import 'package:forecastapp/db/data_base_client.dart';
 
-import '../../../../api_client/api_client.dart';
 import '../models/location_search_model.dart';
 
-abstract class LocationSearchService {
-  Future<List<LocationSearchModel>> fetchEarthID(String query);
+abstract class LocationSearchLocalDataService {
   Future<LocationSearchModel> saveLocationSearch(
     LocationSearchModel location,
   );
@@ -16,21 +14,13 @@ abstract class LocationSearchService {
   );
 }
 
-class LocationSearchServiceImpl implements LocationSearchService {
-  final ApiClient apiClient;
+class LocationSearchLocalDataServiceImpl
+    implements LocationSearchLocalDataService {
   final DataBaseClient dataBaseClient;
 
-  LocationSearchServiceImpl({
-    required this.apiClient,
+  LocationSearchLocalDataServiceImpl({
     required this.dataBaseClient,
   });
-
-  @override
-  Future<List<LocationSearchModel>> fetchEarthID(
-    String query,
-  ) async {
-    return apiClient.fetchEarthID(query);
-  }
 
   @override
   Future<LocationSearchModel> saveLocationSearch(

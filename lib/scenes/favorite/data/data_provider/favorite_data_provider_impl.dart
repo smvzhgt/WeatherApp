@@ -4,10 +4,10 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failure.dart';
 import '../../../location_search/domain/entities/location_search_entity.dart';
 import '../../domain/data_providers/favorite_data_provider.dart';
-import '../services/favorite_service_impl.dart';
+import '../services/favorite_local_data_service_impl.dart';
 
 class FavoriteDataProviderImpl implements FavoriteDataProvider {
-  final FavoriteService service;
+  final FavoriteLocalDataService service;
 
   FavoriteDataProviderImpl({
     required this.service,

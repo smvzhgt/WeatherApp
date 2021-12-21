@@ -6,10 +6,10 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failure.dart';
 import '../../domain/data_providers/location_data_provider.dart';
 import '../../domain/entities/forecast_entity.dart';
-import '../services/location_service.dart';
+import '../services/location_remote_data_service_impl.dart';
 
 class LocationDataProviderImpl implements LocationDataProvider {
-  LocationService service;
+  LocationRemoteDataService service;
 
   LocationDataProviderImpl({
     required this.service,
