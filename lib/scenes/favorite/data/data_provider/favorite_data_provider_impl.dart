@@ -4,19 +4,20 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failure.dart';
 import '../../../location_search/domain/entities/location_search_entity.dart';
 import '../../domain/data_providers/favorite_data_provider.dart';
-import '../services/favorite_local_data_service_impl.dart';
+import '../datasources/favorite_local_data_source_impl.dart';
+
 
 class FavoriteDataProviderImpl implements FavoriteDataProvider {
-  final FavoriteLocalDataService service;
+  final FavoriteLocalDataSource localDataSource;
 
   FavoriteDataProviderImpl({
-    required this.service,
+    required this.localDataSource,
   });
 
   @override
   Future<Either<Failure, List<LocationSearch>>> loadSearchLocations() async {
     try {
-      final result = await service.loadSearchLocations();
+      final result = await localDataSource.loadSearchLocations();
       return Right(result);
     } on DataBaseException {
       return Left(DataBaseFailure());
@@ -28,9 +29,9 @@ class FavoriteDataProviderImpl implements FavoriteDataProvider {
     LocationSearch location,
   ) async {
     try {
-      final result = await service.deleteLocationSearch(location);
+      final result = await localDataSource.deleteLocationSearch(location);
       if (!result.isNegative) {
-        final result = await service.loadSearchLocations();
+        final result = await localDataSource.loadSearchLocations();
         return Right(result);
       } else {
         return Left(DataBaseFailure());

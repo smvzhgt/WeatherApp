@@ -1,13 +1,13 @@
 import 'package:forecastapp/api_client/api_client.dart';
 import 'package:forecastapp/scenes/location/data/data_providers/location_data_provider_impl.dart';
-import 'package:forecastapp/scenes/location/data/services/location_remote_data_service_impl.dart';
+import 'package:forecastapp/scenes/location/data/services/location_remote_data_source_impl.dart';
 import 'package:forecastapp/scenes/location/domain/data_providers/location_data_provider.dart';
 import 'package:forecastapp/scenes/location/domain/entities/forecast_entity.dart';
 import 'package:forecastapp/scenes/location/domain/entities/parent_entity.dart';
 import 'package:forecastapp/scenes/location/domain/entities/source_entity.dart';
 import 'package:forecastapp/scenes/location/domain/entities/weather_entity.dart';
 import 'package:forecastapp/scenes/location/domain/interactors/location_interactor_impl.dart';
-import 'package:forecastapp/scenes/location_search/data/services/location_search_remote_data_service_impl.dart';
+import 'package:forecastapp/scenes/location_search/data/services/location_search_remote_data_source_impl.dart';
 import 'package:forecastapp/scenes/location_search/domain/data_providers/location_search_data_provider.dart';
 import 'package:forecastapp/scenes/location_search/domain/entities/location_search_entity.dart';
 import 'package:forecastapp/scenes/location_search/domain/interactors/location_search_interactor_impl.dart';

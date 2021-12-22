@@ -3,7 +3,7 @@ import 'package:forecastapp/scenes/location/data/models/forecast_model.dart';
 import 'package:forecastapp/scenes/location/data/models/parent_model.dart';
 import 'package:forecastapp/scenes/location/data/models/source_model.dart';
 import 'package:forecastapp/scenes/location/data/models/weather_model.dart';
-import 'package:forecastapp/scenes/location/data/services/location_remote_data_service_impl.dart';
+import 'package:forecastapp/scenes/location/data/services/location_remote_data_source_impl.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../../all_test.mocks.dart';

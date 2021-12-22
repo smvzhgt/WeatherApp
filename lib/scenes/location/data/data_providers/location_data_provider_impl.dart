@@ -6,13 +6,13 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failure.dart';
 import '../../domain/data_providers/location_data_provider.dart';
 import '../../domain/entities/forecast_entity.dart';
-import '../services/location_remote_data_service_impl.dart';
+import '../datasources/location_remote_data_source_impl.dart';
 
 class LocationDataProviderImpl implements LocationDataProvider {
-  LocationRemoteDataService service;
+  LocationRemoteDataSource remoteDataSource;
 
   LocationDataProviderImpl({
-    required this.service,
+    required this.remoteDataSource,
   });
 
   @override
@@ -20,7 +20,7 @@ class LocationDataProviderImpl implements LocationDataProvider {
     int earthID,
   ) async {
     try {
-      final result = await service.fetchForecastData(earthID);
+      final result = await remoteDataSource.fetchForecastData(earthID);
       return Right(result);
     } on ServerException {
       return Left(ServerFailure());

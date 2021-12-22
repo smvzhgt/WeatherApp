@@ -21,7 +21,7 @@ void main() {
 
   setUp(() {
     mockService = MockLocationServiceImpl();
-    dataProvider = LocationDataProviderImpl(service: mockService);
+    dataProvider = LocationDataProviderImpl(remoteDataSource: mockService);
   });
 
   group('LocationDataProviderImpl', () {

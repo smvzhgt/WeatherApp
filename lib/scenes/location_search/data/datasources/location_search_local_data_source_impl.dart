@@ -2,7 +2,7 @@ import 'package:forecastapp/db/data_base_client.dart';
 
 import '../models/location_search_model.dart';
 
-abstract class LocationSearchLocalDataService {
+abstract class LocationSearchLocalDataSource {
   Future<LocationSearchModel> saveLocationSearch(
     LocationSearchModel location,
   );
@@ -14,11 +14,11 @@ abstract class LocationSearchLocalDataService {
   );
 }
 
-class LocationSearchLocalDataServiceImpl
-    implements LocationSearchLocalDataService {
+class LocationSearchLocalDataSourceImpl
+    implements LocationSearchLocalDataSource {
   final DataBaseClient dataBaseClient;
 
-  LocationSearchLocalDataServiceImpl({
+  LocationSearchLocalDataSourceImpl({
     required this.dataBaseClient,
   });
 
