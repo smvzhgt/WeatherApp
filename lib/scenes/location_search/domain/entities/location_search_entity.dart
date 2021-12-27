@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class LocationSearch implements EquatableMixin {
+class LocationSearch extends Equatable {
   final int? id;
   final String title;
   final String locationType;

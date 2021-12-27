@@ -8,24 +8,24 @@ abstract class LocationSearchMemoryDataSource {
 
 class LocationSearchMemoryDataSourceImpl
     implements LocationSearchMemoryDataSource {
-  LocationSearchMemoryDataSourceImpl() : cachedLocations = [];
+  LocationSearchMemoryDataSourceImpl() : _cachedLocations = [];
 
-  List<LocationSearchModel> cachedLocations;
+  List<LocationSearchModel> _cachedLocations;
 
   @override
   void cacheLocations(List<LocationSearchModel> locationModels) {
-    cachedLocations = locationModels;
+    _cachedLocations = locationModels;
   }
 
   @override
   List<LocationSearchModel> getLocations() {
-    return cachedLocations;
+    return _cachedLocations;
   }
 
   @override
   void updateLocation(LocationSearchModel locationModel) {
-    cachedLocations = [
-      for (final location in cachedLocations)
+    _cachedLocations = [
+      for (final location in _cachedLocations)
         if (location.woeid == locationModel.woeid)
           LocationSearchModel(
             id: locationModel.id,
@@ -40,7 +40,7 @@ class LocationSearchMemoryDataSourceImpl
   }
 
   void removeLocation(LocationSearchModel location) {
-    cachedLocations = cachedLocations
+    _cachedLocations = _cachedLocations
         .where((location) => location.id != location.id)
         .toList();
   }

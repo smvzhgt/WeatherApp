@@ -25,17 +25,21 @@ void init() {
   // LocationSearch
   //
 
-  // DataSource
+  // Remote DataSource
   sl.registerLazySingleton<LocationSearchRemoteDataSource>(
-    () => LocationSearchRemoteDataSourceImpl(apiClient: sl()),
+    () => LocationSearchRemoteDataSourceImpl(
+      apiClient: sl(),
+    ),
   );
 
-  // Local Service
+  // Db DataSource
   sl.registerLazySingleton<LocationSearchLocalDataSource>(
-    () => LocationSearchLocalDataSourceImpl(dataBaseClient: sl()),
+    () => LocationSearchLocalDataSourceImpl(
+      dataBaseClient: sl(),
+    ),
   );
 
-  // Memory Service
+  // Memory DataSource
   sl.registerLazySingleton<LocationSearchMemoryDataSource>(
     () => LocationSearchMemoryDataSourceImpl(),
   );
@@ -43,31 +47,42 @@ void init() {
   // DataProvider
   sl.registerLazySingleton<LocationSearchDataProvider>(
     () => LocationSearchDataProviderImpl(
-        remoteDataSource: sl(), localDataSource: sl(), memoryDataSource: sl()),
+      remoteDataSource: sl(),
+      localDataSource: sl(),
+      memoryDataSource: sl(),
+    ),
   );
 
   // Interactor
   sl.registerLazySingleton<LocationSearchInteractor>(
-    () => LocationSearchInteractorImpl(dataProvider: sl()),
+    () => LocationSearchInteractorImpl(
+      dataProvider: sl(),
+    ),
   );
 
   //
   // Location
   //
 
-  // DataSource
+  // Remote DataSource
   sl.registerLazySingleton<LocationRemoteDataSource>(
-    () => LocationRemoteDataSourceImpl(apiClient: sl()),
+    () => LocationRemoteDataSourceImpl(
+      apiClient: sl(),
+    ),
   );
 
   // DataProvider
   sl.registerLazySingleton<LocationDataProvider>(
-    () => LocationDataProviderImpl(remoteDataSource: sl()),
+    () => LocationDataProviderImpl(
+      remoteDataSource: sl(),
+    ),
   );
 
   // Interactor
   sl.registerLazySingleton<LocationInteractor>(
-    () => LocationInteractorImpl(dataProvider: sl()),
+    () => LocationInteractorImpl(
+      dataProvider: sl(),
+    ),
   );
 
   // HttpClient
@@ -77,26 +92,34 @@ void init() {
 
   // ApiClient
   sl.registerLazySingleton<ApiClient>(
-    () => ApiClientImpl(client: sl()),
+    () => ApiClientImpl(
+      client: sl(),
+    ),
   );
 
   //
   // Favorite
   //
 
-  // DataSource
+  // Db DataSource
   sl.registerLazySingleton<FavoriteLocalDataSource>(
-    () => FavoriteLocalDataSourceImpl(dataBaseClient: sl()),
+    () => FavoriteLocalDataSourceImpl(
+      dataBaseClient: sl(),
+    ),
   );
 
   // DataProvider
   sl.registerLazySingleton<FavoriteDataProvider>(
-    () => FavoriteDataProviderImpl(localDataSource: sl()),
+    () => FavoriteDataProviderImpl(
+      localDataSource: sl(),
+    ),
   );
 
   // Interactor
   sl.registerLazySingleton<FavoriteInteractor>(
-    () => FavoriteInteractorImpl(dataProvider: sl()),
+    () => FavoriteInteractorImpl(
+      dataProvider: sl(),
+    ),
   );
 
   // DataBase client

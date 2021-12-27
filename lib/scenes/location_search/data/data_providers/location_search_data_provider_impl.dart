@@ -30,7 +30,7 @@ class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
       final result = await remoteDataSource.fetchEarthID(query);
       memoryDataSource.cacheLocations(result);
       for (final model in result) {
-        final savedModel = await localDataSource.readLocationSearch(model);
+        final savedModel = await localDataSource.getLocationSearch(model);
         if (savedModel != null) {
           memoryDataSource.updateLocation(savedModel);
         }
@@ -50,9 +50,9 @@ class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
     try {
       final locationToSave = location.toggle();
       final modelToSave = locationToSave as LocationSearchModel;
-      final savedModel = await localDataSource.readLocationSearch(modelToSave);
+      final savedModel = await localDataSource.getLocationSearch(modelToSave);
       if (savedModel == null) {
-        final result = await localDataSource.saveLocationSearch(modelToSave);
+        final result = await localDataSource.putLocationSearch(modelToSave);
         memoryDataSource.updateLocation(result);
       }
       return Right(memoryDataSource.getLocations());

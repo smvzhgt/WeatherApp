@@ -3,13 +3,13 @@ import 'package:forecastapp/db/data_base_client.dart';
 import '../models/location_search_model.dart';
 
 abstract class LocationSearchLocalDataSource {
-  Future<LocationSearchModel> saveLocationSearch(
+  Future<LocationSearchModel> putLocationSearch(
     LocationSearchModel location,
   );
   Future<int> deleteLocationSearch(
     LocationSearchModel location,
   );
-  Future<LocationSearchModel?> readLocationSearch(
+  Future<LocationSearchModel?> getLocationSearch(
     LocationSearchModel location,
   );
 }
@@ -23,7 +23,7 @@ class LocationSearchLocalDataSourceImpl
   });
 
   @override
-  Future<LocationSearchModel> saveLocationSearch(
+  Future<LocationSearchModel> putLocationSearch(
     LocationSearchModel location,
   ) async {
     return dataBaseClient.create(location);
@@ -38,7 +38,7 @@ class LocationSearchLocalDataSourceImpl
   }
 
   @override
-  Future<LocationSearchModel?> readLocationSearch(
+  Future<LocationSearchModel?> getLocationSearch(
     LocationSearchModel location,
   ) async {
     final id = location.woeid;

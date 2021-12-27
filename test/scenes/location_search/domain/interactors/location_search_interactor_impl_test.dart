@@ -34,5 +34,27 @@ main() {
       verify(dataProvider.fetchEarthID(query));
       verifyNoMoreInteractions(dataProvider);
     });
+
+    test('Should save Location to favorite list', () async {
+      when(dataProvider.saveLocationSearch(tEntity))
+          .thenAnswer((realInvocation) async => Right(tListEntities));
+
+      final result = await interactor.saveLocationSearch(location: tEntity);
+
+      expect(result, Right(tListEntities));
+      verify(dataProvider.saveLocationSearch(tEntity));
+      verifyNoMoreInteractions(dataProvider);
+    });
+
+    test('Should delete Location from favorite list', () async {
+      when(dataProvider.deleteLocationSearch(tEntity))
+          .thenAnswer((realInvocation) async => Right(tListEntities));
+
+      final result = await interactor.deleteLocationSearch(location: tEntity);
+
+      expect(result, Right(tListEntities));
+      verify(dataProvider.deleteLocationSearch(tEntity));
+      verifyNoMoreInteractions(dataProvider);
+    });
   });
 }

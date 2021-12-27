@@ -1,16 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forecastapp/db/data_base_client.dart';
+import 'package:forecastapp/scenes/location_search/data/datasources/location_search_remote_data_source_impl.dart';
 import 'package:forecastapp/scenes/location_search/data/models/location_search_model.dart';
-import 'package:forecastapp/scenes/location_search/data/services/location_search_remote_data_source_impl.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../../all_test.mocks.dart';
 
 main() {
-  group('Location Search Service', () {
+  group('Location Search Remote Data Source', () {
     late MockApiClientImpl mockApiClient;
-    late LocationSearchRemoteDataService service;
-    late DataBaseClient dataBaseClient;
+    late LocationSearchRemoteDataSource remoteDataSource;
     final tModel = LocationSearchModel(
       title: 'Kharkiv',
       locationType: 'City',
@@ -21,17 +19,16 @@ main() {
     const query = 'kharkiv';
 
     setUp(() {
-      dataBaseClient = DataBaseClient.instance;
       mockApiClient = MockApiClientImpl();
-      service = LocationSearchRemoteDataServiceImpl(
-          apiClient: mockApiClient, dataBaseClient: dataBaseClient);
+      remoteDataSource =
+          LocationSearchRemoteDataSourceImpl(apiClient: mockApiClient);
     });
 
     test('should return data when request successful', () async {
       when(mockApiClient.fetchEarthID(query))
           .thenAnswer((_) async => Future.value(tListModels));
 
-      final result = await service.fetchEarthID(query);
+      final result = await remoteDataSource.fetchEarthID(query);
 
       verify(mockApiClient.fetchEarthID(query));
       expect(result, tListModels);

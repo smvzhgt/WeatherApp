@@ -15,13 +15,15 @@ import 'package:mockito/mockito.dart';
 import '../../../../all_test.mocks.dart';
 
 void main() {
-  late MockLocationServiceImpl mockService;
+  late MockLocationRemoteDataSourceImpl mockRemoteDataSource;
   late LocationDataProvider dataProvider;
   const earthID = 1234567;
 
   setUp(() {
-    mockService = MockLocationServiceImpl();
-    dataProvider = LocationDataProviderImpl(remoteDataSource: mockService);
+    mockRemoteDataSource = MockLocationRemoteDataSourceImpl();
+    dataProvider = LocationDataProviderImpl(
+      remoteDataSource: mockRemoteDataSource,
+    );
   });
 
   group('LocationDataProviderImpl', () {
@@ -68,31 +70,32 @@ void main() {
         parent: parent,
         sources: [sourceModel],
       );
-      when(mockService.fetchForecastData(earthID))
+      when(mockRemoteDataSource.fetchForecastData(earthID))
           .thenAnswer((_) => Future.value(tForecastModel));
 
       final result = await dataProvider.fetchForecastData(earthID);
 
-      verify(mockService.fetchForecastData(earthID));
+      verify(mockRemoteDataSource.fetchForecastData(earthID));
       expect(result, const Right(tForecastModel));
     });
 
     test('should return failure when request unsuccessful', () async {
-      when(mockService.fetchForecastData(earthID)).thenThrow(ServerException());
+      when(mockRemoteDataSource.fetchForecastData(earthID))
+          .thenThrow(ServerException());
 
       final result = await dataProvider.fetchForecastData(earthID);
 
-      verify(mockService.fetchForecastData(earthID));
+      verify(mockRemoteDataSource.fetchForecastData(earthID));
       expect(result, Left(ServerFailure()));
     });
 
     test('should return socket failure when device s offline', () async {
-      when(mockService.fetchForecastData(earthID))
+      when(mockRemoteDataSource.fetchForecastData(earthID))
           .thenThrow(const SocketException('No internet connection'));
 
       final result = await dataProvider.fetchForecastData(earthID);
 
-      verify(mockService.fetchForecastData(earthID));
+      verify(mockRemoteDataSource.fetchForecastData(earthID));
       expect(result, Left(SocketFailure()));
     });
   });

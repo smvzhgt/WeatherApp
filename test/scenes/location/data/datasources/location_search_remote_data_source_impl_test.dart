@@ -1,22 +1,22 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:forecastapp/scenes/location/data/datasources/location_remote_data_source_impl.dart';
 import 'package:forecastapp/scenes/location/data/models/forecast_model.dart';
 import 'package:forecastapp/scenes/location/data/models/parent_model.dart';
 import 'package:forecastapp/scenes/location/data/models/source_model.dart';
 import 'package:forecastapp/scenes/location/data/models/weather_model.dart';
-import 'package:forecastapp/scenes/location/data/services/location_remote_data_source_impl.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../../all_test.mocks.dart';
 
 main() {
-  group('LocationService', () {
+  group('Location Remote Data Source', () {
     late MockApiClientImpl mockApiClient;
-    late LocationRemoteDataService service;
+    late LocationRemoteDataSource remoteDataSource;
     const earthID = 1234567;
 
     setUp(() {
       mockApiClient = MockApiClientImpl();
-      service = LocationRemoteDataServiceImpl(apiClient: mockApiClient);
+      remoteDataSource = LocationRemoteDataSourceImpl(apiClient: mockApiClient);
     });
 
     test('should return data when request successful', () async {
@@ -65,7 +65,7 @@ main() {
       when(mockApiClient.fetchForecastData(earthID))
           .thenAnswer((_) async => Future.value(tForecastModel));
 
-      final result = await service.fetchForecastData(earthID);
+      final result = await remoteDataSource.fetchForecastData(earthID);
 
       verify(mockApiClient.fetchForecastData(earthID));
       expect(result, tForecastModel);

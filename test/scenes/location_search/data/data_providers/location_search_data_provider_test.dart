@@ -13,7 +13,9 @@ import '../../../../all_test.mocks.dart';
 
 main() {
   late LocationSearchDataProvider dataProvider;
-  late MockLocationSearchServiceImpl mockService;
+  late MockLocationSearchRemoteDataSourceImpl mockRemoteDataSource;
+  late MockLocationSearchLocalDataSourceImpl mockLocalDataSource;
+  late MockLocationSearchMemoryDataSourceImpl mockMemoryDataSource;
   final tModel = LocationSearchModel(
     title: 'Kharkiv',
     locationType: 'City',
@@ -24,38 +26,75 @@ main() {
   final tListModels = [tModel];
 
   setUp(() {
-    mockService = MockLocationSearchServiceImpl();
-    dataProvider = LocationSearchDataProviderImpl(remoteDataSource: mockService);
+    mockRemoteDataSource = MockLocationSearchRemoteDataSourceImpl();
+    mockLocalDataSource = MockLocationSearchLocalDataSourceImpl();
+    mockMemoryDataSource = MockLocationSearchMemoryDataSourceImpl();
+    dataProvider = LocationSearchDataProviderImpl(
+      remoteDataSource: mockRemoteDataSource,
+      localDataSource: mockLocalDataSource,
+      memoryDataSource: mockMemoryDataSource,
+    );
   });
 
   group('LocationSearchDataProviderImpl', () {
-    test('should return data when request successful', () async {
-      when(mockService.fetchEarthID(query))
+    group('Test fetchEarthID', () {
+      test('should return data when request successful', () async {
+        when(mockRemoteDataSource.fetchEarthID(query))
+            .thenAnswer((_) async => Future.value(tListModels));
+        when(mockLocalDataSource.getLocationSearch(tModel))
+            .thenAnswer((_) async => Future.value(tModel));
+        when(mockMemoryDataSource.getLocations()).thenReturn(tListModels);
+
+        final result = await dataProvider.fetchEarthID(query);
+
+        verify(mockRemoteDataSource.fetchEarthID(query));
+        expect(result, Right(tListModels));
+      });
+
+      test('should return failure when request unsuccessful', () async {
+        when(mockRemoteDataSource.fetchEarthID(query))
+            .thenThrow(ServerException());
+
+        final result = await dataProvider.fetchEarthID(query);
+
+        verify(mockRemoteDataSource.fetchEarthID(query));
+        expect(result, Left(ServerFailure()));
+      });
+
+      test('should return socket failure when device is offline', () async {
+        when(mockRemoteDataSource.fetchEarthID(query))
+            .thenThrow(const SocketException('No internet connection'));
+
+        final result = await dataProvider.fetchEarthID(query);
+
+        verify(mockRemoteDataSource.fetchEarthID(query));
+        expect(result, Left(SocketFailure()));
+      });
+    });
+
+    test('should store data to memory cache when request successful', () async {
+      when(mockRemoteDataSource.fetchEarthID(query))
           .thenAnswer((_) async => Future.value(tListModels));
+      when(mockLocalDataSource.getLocationSearch(tModel))
+          .thenAnswer((_) async => Future.value(tModel));
+      when(mockMemoryDataSource.getLocations()).thenReturn(tListModels);
 
-      final result = await dataProvider.fetchEarthID(query);
+      when(mockMemoryDataSource.cacheLocations(tListModels)).thenReturn(null);
 
-      verify(mockService.fetchEarthID(query));
-      expect(result, Right(tListModels));
+      await dataProvider.fetchEarthID(query);
+
+      verify(mockRemoteDataSource.fetchEarthID(query));
+      verify(mockMemoryDataSource.cacheLocations(tListModels));
     });
 
-    test('should return failure when request unsuccessful', () async {
-      when(mockService.fetchEarthID(query)).thenThrow(ServerException());
+    test('should delete data from db when delete from favorite', () async {
+      when(mockLocalDataSource.deleteLocationSearch(tModel))
+          .thenAnswer((_) async => Future.value(1));
+      when(mockMemoryDataSource.getLocations()).thenReturn(tListModels);
 
-      final result = await dataProvider.fetchEarthID(query);
+      await dataProvider.deleteLocationSearch(tModel);
 
-      verify(mockService.fetchEarthID(query));
-      expect(result, Left(ServerFailure()));
-    });
-
-    test('should return socket failure when device s offline', () async {
-      when(mockService.fetchEarthID(query))
-          .thenThrow(const SocketException('No internet connection'));
-
-      final result = await dataProvider.fetchEarthID(query);
-
-      verify(mockService.fetchEarthID(query));
-      expect(result, Left(SocketFailure()));
+      verify(mockLocalDataSource.deleteLocationSearch(tModel));
     });
   });
 }
