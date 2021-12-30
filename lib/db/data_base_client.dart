@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../scenes/location_search/data/models/locatio_search_fields.dart';
 import '../scenes/location_search/data/models/location_search_model.dart';
 
 class DataBaseClient {

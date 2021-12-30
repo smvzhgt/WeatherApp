@@ -1,14 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-class LocationSearch extends Equatable {
-  final int? id;
+class LocationSearch with EquatableMixin {
   final String title;
   final String locationType;
   final int woeid;
   bool isFavorite;
 
   LocationSearch({
-    this.id,
     required this.title,
     required this.locationType,
     required this.woeid,
@@ -16,7 +14,6 @@ class LocationSearch extends Equatable {
   });
 
   LocationSearch.empty({
-    this.id = 0,
     this.title = '',
     this.locationType = '',
     this.woeid = 0,
@@ -24,12 +21,8 @@ class LocationSearch extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, title, locationType, woeid, isFavorite];
+  List<Object?> get props => [title, locationType, woeid, isFavorite];
 
   @override
   bool? get stringify => null;
-
-  LocationSearch toggle() {
-    return LocationSearch.empty(isFavorite: !isFavorite);
-  }
 }

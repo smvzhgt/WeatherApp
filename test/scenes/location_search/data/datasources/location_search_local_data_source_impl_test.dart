@@ -37,7 +37,7 @@ main() {
       when(mockDataBaseClient.read(tModel.woeid))
           .thenAnswer((_) async => Future.value(tModel));
 
-      final result = await localDataSource.getLocationSearch(tModel);
+      final result = await localDataSource.getLocationSearch(tModel.woeid);
 
       verify(mockDataBaseClient.read(tModel.woeid));
       expect(result, tModel);
@@ -47,7 +47,7 @@ main() {
       when(mockDataBaseClient.delete(tModel.woeid))
           .thenAnswer((_) async => Future.value(tIndex));
 
-      final result = await localDataSource.deleteLocationSearch(tModel);
+      final result = await localDataSource.deleteLocationSearch(tModel.woeid);
 
       verify(mockDataBaseClient.delete(tModel.woeid));
       expect(result, tIndex);

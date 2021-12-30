@@ -41,7 +41,7 @@ main() {
       test('should return data when request successful', () async {
         when(mockRemoteDataSource.fetchEarthID(query))
             .thenAnswer((_) async => Future.value(tListModels));
-        when(mockLocalDataSource.getLocationSearch(tModel))
+        when(mockLocalDataSource.getLocationSearch(tModel.woeid))
             .thenAnswer((_) async => Future.value(tModel));
         when(mockMemoryDataSource.getLocations()).thenReturn(tListModels);
 
@@ -75,7 +75,7 @@ main() {
     test('should store data to memory cache when request successful', () async {
       when(mockRemoteDataSource.fetchEarthID(query))
           .thenAnswer((_) async => Future.value(tListModels));
-      when(mockLocalDataSource.getLocationSearch(tModel))
+      when(mockLocalDataSource.getLocationSearch(tModel.woeid))
           .thenAnswer((_) async => Future.value(tModel));
       when(mockMemoryDataSource.getLocations()).thenReturn(tListModels);
 
@@ -88,13 +88,13 @@ main() {
     });
 
     test('should delete data from db when delete from favorite', () async {
-      when(mockLocalDataSource.deleteLocationSearch(tModel))
+      when(mockLocalDataSource.deleteLocationSearch(tModel.woeid))
           .thenAnswer((_) async => Future.value(1));
       when(mockMemoryDataSource.getLocations()).thenReturn(tListModels);
 
       await dataProvider.deleteLocationSearch(tModel);
 
-      verify(mockLocalDataSource.deleteLocationSearch(tModel));
+      verify(mockLocalDataSource.deleteLocationSearch(tModel.woeid));
     });
   });
 }

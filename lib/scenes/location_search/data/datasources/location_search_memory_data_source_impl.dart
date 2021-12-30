@@ -1,47 +1,40 @@
-import '../models/location_search_model.dart';
+import '../../domain/entities/location_search_entity.dart';
 
 abstract class LocationSearchMemoryDataSource {
-  void cacheLocations(List<LocationSearchModel> locationModels);
-  List<LocationSearchModel> getLocations();
-  void updateLocation(LocationSearchModel locationModel);
+  void cacheLocations(List<LocationSearch> locationModels);
+  List<LocationSearch> getLocations();
+  void updateLocation(LocationSearch locationModel);
 }
 
 class LocationSearchMemoryDataSourceImpl
     implements LocationSearchMemoryDataSource {
   LocationSearchMemoryDataSourceImpl() : _cachedLocations = [];
 
-  List<LocationSearchModel> _cachedLocations;
+  List<LocationSearch> _cachedLocations;
 
   @override
-  void cacheLocations(List<LocationSearchModel> locationModels) {
+  void cacheLocations(List<LocationSearch> locationModels) {
     _cachedLocations = locationModels;
   }
 
   @override
-  List<LocationSearchModel> getLocations() {
+  List<LocationSearch> getLocations() {
     return _cachedLocations;
   }
 
   @override
-  void updateLocation(LocationSearchModel locationModel) {
+  void updateLocation(LocationSearch locationEntity) {
     _cachedLocations = [
       for (final location in _cachedLocations)
-        if (location.woeid == locationModel.woeid)
-          LocationSearchModel(
-            id: locationModel.id,
-            title: locationModel.title,
-            locationType: locationModel.locationType,
-            woeid: locationModel.woeid,
-            isFavorite: locationModel.isFavorite,
+        if (location.woeid == locationEntity.woeid)
+          LocationSearch(
+            title: locationEntity.title,
+            locationType: locationEntity.locationType,
+            woeid: locationEntity.woeid,
+            isFavorite: locationEntity.isFavorite,
           )
         else
           location,
     ];
-  }
-
-  void removeLocation(LocationSearchModel location) {
-    _cachedLocations = _cachedLocations
-        .where((location) => location.id != location.id)
-        .toList();
   }
 }

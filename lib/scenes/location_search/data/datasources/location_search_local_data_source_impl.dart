@@ -7,10 +7,10 @@ abstract class LocationSearchLocalDataSource {
     LocationSearchModel location,
   );
   Future<int> deleteLocationSearch(
-    LocationSearchModel location,
+    int id,
   );
   Future<LocationSearchModel?> getLocationSearch(
-    LocationSearchModel location,
+    int id,
   );
 }
 
@@ -31,17 +31,15 @@ class LocationSearchLocalDataSourceImpl
 
   @override
   Future<int> deleteLocationSearch(
-    LocationSearchModel location,
+    int id,
   ) async {
-    final id = location.woeid;
     return await dataBaseClient.delete(id);
   }
 
   @override
   Future<LocationSearchModel?> getLocationSearch(
-    LocationSearchModel location,
+    int id,
   ) async {
-    final id = location.woeid;
     return await dataBaseClient.read(id);
   }
 }
