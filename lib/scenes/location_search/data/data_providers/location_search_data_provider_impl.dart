@@ -9,7 +9,7 @@ import '../../domain/entities/location_search_entity.dart';
 import '../datasources/location_search_local_data_source_impl.dart';
 import '../datasources/location_search_memory_data_source_impl.dart';
 import '../datasources/location_search_remote_data_source_impl.dart';
-import '../models/location_search_model.dart';
+import '../models/LocationSearchMapper.dart';
 
 class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
   LocationSearchRemoteDataSource remoteDataSource;
@@ -30,7 +30,7 @@ class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
       final result = await remoteDataSource.fetchEarthID(query);
       memoryDataSource.cacheLocations(result);
       for (final model in result) {
-        final savedModel = await localDataSource.getLocationSearch(model);
+        final savedModel = await localDataSource.getLocationSearch(model.woeid);
         if (savedModel != null) {
           memoryDataSource.updateLocation(savedModel);
         }
@@ -48,10 +48,12 @@ class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
     LocationSearch location,
   ) async {
     try {
-      final locationToSave = location.toggle();
-      final modelToSave = locationToSave as LocationSearchModel;
-      final savedModel = await localDataSource.getLocationSearch(modelToSave);
+      final savedModel =
+          await localDataSource.getLocationSearch(location.woeid);
       if (savedModel == null) {
+        final locationToSave = LocationSearchUtil.toggle(location: location);
+        final modelToSave =
+            LocationSearchUtil.fromEntity(location: locationToSave);
         final result = await localDataSource.putLocationSearch(modelToSave);
         memoryDataSource.updateLocation(result);
       }
@@ -66,11 +68,10 @@ class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
     LocationSearch location,
   ) async {
     try {
-      final modelToDelete = location as LocationSearchModel;
-      final result = await localDataSource.deleteLocationSearch(modelToDelete);
+      final result = await localDataSource.deleteLocationSearch(location.woeid);
       if (result > 0) {
-        final model = modelToDelete.toggle();
-        memoryDataSource.updateLocation(model);
+        final locationToUpdate = LocationSearchUtil.toggle(location: location);
+        memoryDataSource.updateLocation(locationToUpdate);
       }
       return Right(memoryDataSource.getLocations());
     } on DataBaseException {
