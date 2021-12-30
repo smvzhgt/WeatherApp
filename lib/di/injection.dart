@@ -12,7 +12,7 @@ import '../scenes/location/data/datasources/location_remote_data_source_impl.dar
 import '../scenes/location/domain/data_providers/location_data_provider.dart';
 import '../scenes/location/domain/interactors/location_interactor_impl.dart';
 import '../scenes/location_search/data/data_providers/location_search_data_provider_impl.dart';
-import '../scenes/location_search/data/datasources/location_search_local_data_source_impl.dart';
+import '../scenes/location_search/data/datasources/location_search_database_data_source_impl.dart';
 import '../scenes/location_search/data/datasources/location_search_memory_data_source_impl.dart';
 import '../scenes/location_search/data/datasources/location_search_remote_data_source_impl.dart';
 import '../scenes/location_search/domain/data_providers/location_search_data_provider.dart';
@@ -33,8 +33,8 @@ void init() {
   );
 
   // Db DataSource
-  sl.registerLazySingleton<LocationSearchLocalDataSource>(
-    () => LocationSearchLocalDataSourceImpl(
+  sl.registerLazySingleton<LocationSearchDataBaseDataSource>(
+    () => LocationSearchDataBaseDataSourceImpl(
       dataBaseClient: sl(),
     ),
   );

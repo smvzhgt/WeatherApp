@@ -8,7 +8,7 @@ import 'package:forecastapp/scenes/location/domain/entities/parent_entity.dart';
 import 'package:forecastapp/scenes/location/domain/entities/source_entity.dart';
 import 'package:forecastapp/scenes/location/domain/entities/weather_entity.dart';
 import 'package:forecastapp/scenes/location/domain/interactors/location_interactor_impl.dart';
-import 'package:forecastapp/scenes/location_search/data/datasources/location_search_local_data_source_impl.dart';
+import 'package:forecastapp/scenes/location_search/data/datasources/location_search_database_data_source_impl.dart';
 import 'package:forecastapp/scenes/location_search/data/datasources/location_search_memory_data_source_impl.dart';
 import 'package:forecastapp/scenes/location_search/data/datasources/location_search_remote_data_source_impl.dart';
 import 'package:forecastapp/scenes/location_search/domain/data_providers/location_search_data_provider.dart';
@@ -61,7 +61,7 @@ import 'core/wind_direction_converter_test.dart' as wind_direction_converter;
 
 const listMocks = [
   LocationSearchRemoteDataSourceImpl,
-  LocationSearchLocalDataSourceImpl,
+  LocationSearchDataBaseDataSourceImpl,
   LocationSearchMemoryDataSourceImpl,
   ApiClientImpl,
   LocationSearch,

@@ -6,14 +6,14 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failure.dart';
 import '../../domain/data_providers/location_search_data_provider.dart';
 import '../../domain/entities/location_search_entity.dart';
-import '../datasources/location_search_local_data_source_impl.dart';
+import '../datasources/location_search_database_data_source_impl.dart';
 import '../datasources/location_search_memory_data_source_impl.dart';
 import '../datasources/location_search_remote_data_source_impl.dart';
 import '../models/LocationSearchMapper.dart';
 
 class LocationSearchDataProviderImpl implements LocationSearchDataProvider {
   LocationSearchRemoteDataSource remoteDataSource;
-  LocationSearchLocalDataSource localDataSource;
+  LocationSearchDataBaseDataSource localDataSource;
   LocationSearchMemoryDataSource memoryDataSource;
 
   LocationSearchDataProviderImpl({

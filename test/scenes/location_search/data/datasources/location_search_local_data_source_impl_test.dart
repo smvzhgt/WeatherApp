@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forecastapp/scenes/location_search/data/datasources/location_search_local_data_source_impl.dart';
+import 'package:forecastapp/scenes/location_search/data/datasources/location_search_database_data_source_impl.dart';
 import 'package:forecastapp/scenes/location_search/data/models/location_search_model.dart';
 import 'package:mockito/mockito.dart';
 
@@ -7,7 +7,7 @@ import '../../../../all_test.mocks.dart';
 
 main() {
   group('Location Search Local Data Source', () {
-    late LocationSearchLocalDataSource localDataSource;
+    late LocationSearchDataBaseDataSource localDataSource;
     late MockDataBaseClient mockDataBaseClient;
     final tModel = LocationSearchModel(
       title: 'Kharkiv',
@@ -20,7 +20,7 @@ main() {
     setUp(() {
       mockDataBaseClient = MockDataBaseClient();
       localDataSource =
-          LocationSearchLocalDataSourceImpl(dataBaseClient: mockDataBaseClient);
+          LocationSearchDataBaseDataSourceImpl(dataBaseClient: mockDataBaseClient);
     });
 
     test('should create item in db', () async {
