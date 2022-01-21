@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:forecastapp/core/constants.dart';
 
+import '../../../../core/constants.dart';
+import '../../../../core/widgets/background.dart';
 import '../../domain/entities/weather_entity.dart';
 import 'weather_page.dart';
 
 class WeatherPageView extends StatefulWidget {
   final List<WeatherEntity> entities;
+
   const WeatherPageView({
     Key? key,
     required this.entities,
@@ -44,23 +46,30 @@ class _WeatherPageViewState extends State<WeatherPageView> {
       },
     );
 
-    return Padding(
-      padding: const EdgeInsets.all(kAppPadding),
-      child: Column(
-        children: [
-          Expanded(child: _pageView),
-          Container(
-            margin: const EdgeInsets.all(kAppWidgetPaddingSmall),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (int i = 0; i < widget.entities.length; i++)
-                  (i == currentPage) ? indicatorActive() : indicatorInActive()
-              ],
-            ),
+    return Stack(
+      children: [
+        const Background(),
+        Padding(
+          padding: const EdgeInsets.all(kAppPadding),
+          child: Column(
+            children: [
+              Expanded(child: _pageView),
+              Container(
+                margin: const EdgeInsets.all(kAppWidgetPaddingSmall),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < widget.entities.length; i++)
+                      (i == currentPage)
+                          ? indicatorActive()
+                          : indicatorInActive()
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        )
+      ],
     );
   }
 
@@ -70,10 +79,11 @@ class _WeatherPageViewState extends State<WeatherPageView> {
       margin: const EdgeInsets.symmetric(horizontal: kAppWidgetPadding),
       height: kIndicatorHeight,
       width: kIndicatorWidth,
-      decoration: BoxDecoration(
-        color: Colors.blue[700],
-        borderRadius:
-            const BorderRadius.all(Radius.circular(kIndicatorBorderRadius)),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(
+          Radius.circular(kIndicatorBorderRadius),
+        ),
       ),
     );
   }
@@ -85,8 +95,10 @@ class _WeatherPageViewState extends State<WeatherPageView> {
       height: kIndicatorHeight,
       width: kIndicatorWidth,
       decoration: const BoxDecoration(
-        color: Colors.grey,
-        borderRadius: BorderRadius.all(Radius.circular(kIndicatorBorderRadius)),
+        color: Colors.white24,
+        borderRadius: BorderRadius.all(
+          Radius.circular(kIndicatorBorderRadius),
+        ),
       ),
     );
   }

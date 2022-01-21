@@ -26,8 +26,8 @@ class DetailLocationTemperatureRowItem extends StatelessWidget {
         right: kAppWidgetPadding,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey.shade200),
+        color: Theme.of(context).cardColor,
+        border: Border.all(color: Theme.of(context).cardColor),
         borderRadius: BorderRadius.circular(kDetailRowContainerRadius),
         boxShadow: [
           BoxShadow(
@@ -48,7 +48,7 @@ class DetailLocationTemperatureRowItem extends StatelessWidget {
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: Colors.grey.shade700,
+              color: Theme.of(context).focusColor,
             ),
           ),
           Row(
@@ -60,7 +60,7 @@ class DetailLocationTemperatureRowItem extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.normal,
-                  color: Colors.grey.shade700,
+                  color: Theme.of(context).focusColor,
                 ),
               ),
               const SizedBox(width: 25),
@@ -69,7 +69,7 @@ class DetailLocationTemperatureRowItem extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.normal,
-                  color: Colors.grey.shade700,
+                  color: Theme.of(context).focusColor,
                 ),
               ),
             ],

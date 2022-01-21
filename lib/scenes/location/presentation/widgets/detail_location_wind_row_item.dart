@@ -27,8 +27,8 @@ class DetailLocationWindRowItem extends StatelessWidget {
       ),
       padding: const EdgeInsets.only(left: kAppWidgetPadding),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey.shade200),
+        color: Theme.of(context).cardColor,
+        border: Border.all(color: Theme.of(context).cardColor),
         borderRadius: BorderRadius.circular(kDetailRowContainerRadius),
         boxShadow: [
           BoxShadow(
@@ -46,6 +46,7 @@ class DetailLocationWindRowItem extends StatelessWidget {
             kImagePathWind,
             _imageSize,
             _imageSize,
+            color: Theme.of(context).focusColor
           ),
           const SizedBox(width: kSizedBoxHeightBig),
           Expanded(
@@ -57,7 +58,7 @@ class DetailLocationWindRowItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.normal,
-                    color: Colors.grey.shade700,
+                    color: Theme.of(context).focusColor,
                   ),
                 ),
               ],

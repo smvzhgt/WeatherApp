@@ -16,11 +16,13 @@ class DetailLocationDateItem extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       margin: const EdgeInsets.only(
-          left: kAppWidgetPadding, right: kAppWidgetPadding),
+        left: kAppWidgetPadding,
+        right: kAppWidgetPadding,
+      ),
       padding: const EdgeInsets.only(left: kAppWidgetPadding),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey.shade200),
+        color: Theme.of(context).cardColor,
+        border: Border.all(color: Theme.of(context).cardColor),
         borderRadius: BorderRadius.circular(kDetailRowContainerRadius),
         boxShadow: [
           BoxShadow(
@@ -37,7 +39,7 @@ class DetailLocationDateItem extends StatelessWidget {
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.grey.shade700,
+          color: Theme.of(context).focusColor,
         ),
         textAlign: TextAlign.center,
       ),

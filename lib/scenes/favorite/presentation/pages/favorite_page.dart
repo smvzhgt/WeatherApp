@@ -1,12 +1,13 @@
 import "package:flutter/material.dart";
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:forecastapp/generated/l10n.dart';
 
 import '../../../../core/pages/empty_page.dart';
 import '../../../../core/pages/error_page.dart';
 import '../../../../core/pages/information_page.dart';
 import '../../../../core/pages/loading_page.dart';
 import '../../../../core/state.dart';
+import '../../../../core/widgets/background.dart';
+import '../../../../generated/l10n.dart';
 import '../../../location_search/domain/entities/location_search_entity.dart';
 import '../../../location_search/presentation/widgets/location_search_row_item.dart';
 import '../riverpod/provider/favorite_provider.dart';
@@ -27,7 +28,7 @@ class _FavoritePageState extends State<FavoritePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_){
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       context.read(favoriteNotifierProvider.notifier).loadSearchLocations();
     });
   }
@@ -43,11 +44,16 @@ class _FavoritePageState extends State<FavoritePage> {
       appBar: AppBar(
         title: Text(S.of(context).page_title_favorite_location),
       ),
-      body: Consumer(
-        builder: (context, watch, child) {
-          final state = watch(favoriteNotifierProvider);
-          return _buildState(state);
-        },
+      body: Stack(
+        children: [
+          const Background(),
+          Consumer(
+            builder: (context, watch, child) {
+              final state = watch(favoriteNotifierProvider);
+              return _buildState(state);
+            },
+          )
+        ],
       ),
     );
   }
@@ -58,10 +64,8 @@ class _FavoritePageState extends State<FavoritePage> {
     } else if (state is FavoriteLoadedState) {
       final entities = state.models;
       if (entities.isEmpty) {
-        return Center(
-          child: InformationPage(
-            message: S.of(context).no_favorite_message_information_page,
-          ),
+        return InformationPage(
+          message: S.of(context).no_favorite_message_information_page,
         );
       }
       return _buildList(entities);

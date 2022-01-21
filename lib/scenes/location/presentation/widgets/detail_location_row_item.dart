@@ -28,8 +28,8 @@ class DetailLocationRowItem extends StatelessWidget {
       ),
       padding: const EdgeInsets.only(left: kAppWidgetPadding),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey.shade200),
+        color: Theme.of(context).cardColor,
+        border: Border.all(color: Theme.of(context).cardColor),
         borderRadius: BorderRadius.circular(kDetailRowContainerRadius),
         boxShadow: [
           BoxShadow(
@@ -43,14 +43,19 @@ class DetailLocationRowItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SVGPictureWrapper().assets(imageName, imageHeight, imageWidth),
+          SVGPictureWrapper().assets(
+            imageName,
+            imageHeight,
+            imageWidth,
+            color: Theme.of(context).focusColor
+          ),
           const SizedBox(width: kSizedBoxHeightBig),
           Text(
             text,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.normal,
-              color: Colors.grey.shade700,
+              color: Theme.of(context).focusColor,
             ),
           ),
         ],

@@ -22,12 +22,14 @@ class LocationSearchRowItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        textColor: Colors.white70,
         title: Text(entity.title),
         onTap: () => _onTouch(context),
         trailing: GestureDetector(
-          // child: const Icon(Icons.star_border),
           child: FavoriteButtonWidget(
-              entity: entity, onClickButton: onClickButton),
+            entity: entity,
+            onClickButton: onClickButton,
+          ),
         ),
       ),
     );

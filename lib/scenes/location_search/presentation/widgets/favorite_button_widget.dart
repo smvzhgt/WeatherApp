@@ -24,8 +24,8 @@ class _FavoriteButtonWidgetState extends State<FavoriteButtonWidget> {
         widget.onClickButton(widget.entity);
       },
       icon: widget.entity.isFavorite
-          ? const Icon(Icons.star)
-          : const Icon(Icons.star_border),
+          ? const Icon(Icons.star, color: Colors.amber)
+          : const Icon(Icons.star_border, color: Colors.amber),
       color: Theme.of(context).indicatorColor,
     );
   }

@@ -7,6 +7,7 @@ import '../../../../core/pages/error_page.dart';
 import '../../../../core/pages/information_page.dart';
 import '../../../../core/pages/loading_page.dart';
 import '../../../../core/state.dart';
+import '../../../../core/widgets/background.dart';
 import '../../../../generated/l10n.dart';
 import '../../domain/entities/location_search_entity.dart';
 import '../riverpod/provider/location_search_providers.dart';
@@ -52,18 +53,25 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
         appBar: AppBar(
           title: Text(S.of(context).page_title_location_search),
         ),
-        body: Column(
+        body: Stack(
           children: [
-            _buildTextField(),
-            const SizedBox(height: kSizedBoxHeightSmall),
-            Expanded(
-              child: Center(
-                child: Consumer(builder: (context, watch, child) {
-                  final state = watch(lsNotifierProvider);
-                  return _buildState(state);
-                }),
-              ),
-            )
+            const Background(),
+            Column(
+              children: [
+                _buildTextField(),
+                const SizedBox(height: kSizedBoxHeightSmall),
+                Expanded(
+                  child: Center(
+                    child: Consumer(
+                      builder: (context, watch, child) {
+                        final state = watch(lsNotifierProvider);
+                        return _buildState(state);
+                      },
+                    ),
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),
@@ -79,9 +87,7 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
 
   void _onPressedButton(String value) {
     controller.clear();
-    context
-        .read(lsNotifierProvider.notifier)
-        .fetchEarthID(query: _query);
+    context.read(lsNotifierProvider.notifier).fetchEarthID(query: _query);
   }
 
   void _onChangedValue(String value) {
@@ -96,13 +102,9 @@ class _LocationSearchPageState extends State<LocationSearchPage> {
     return Container(
       margin: const EdgeInsets.all(kAppWidgetPadding),
       child: TextField(
+        style: TextStyle(color: Theme.of(context).focusColor),
         controller: controller,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(kAppWidgetPadding),
-          border: OutlineInputBorder(
-            borderRadius:
-                BorderRadius.circular(kTextFieldDecorationBorderRadius),
-          ),
           hintText: S.of(context).hint_text_input_location_search,
           prefixIcon: const Icon(Icons.search),
         ),

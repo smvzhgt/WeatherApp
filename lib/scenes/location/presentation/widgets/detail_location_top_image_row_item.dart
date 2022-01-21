@@ -26,8 +26,8 @@ class DetailLocationTopImageRowItem extends StatelessWidget {
           left: kAppWidgetPadding, right: kAppWidgetPadding),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey.shade200),
+        color: Theme.of(context).cardColor,
+        border: Border.all(color: Theme.of(context).cardColor),
         borderRadius: BorderRadius.circular(kDetailRowContainerRadius),
         boxShadow: [
           BoxShadow(
@@ -50,7 +50,7 @@ class DetailLocationTopImageRowItem extends StatelessWidget {
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w700,
-              color: Colors.grey.shade700,
+              color: Theme.of(context).focusColor,
             ),
           ),
         ],
