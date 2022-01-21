@@ -14,7 +14,7 @@ import '../../../../all_test.mocks.dart';
 main() {
   late LocationSearchDataProvider dataProvider;
   late MockLocationSearchRemoteDataSourceImpl mockRemoteDataSource;
-  late MockLocationSearchLocalDataSourceImpl mockLocalDataSource;
+  late MockLocationSearchDataBaseDataSourceImpl mockLocalDataSource;
   late MockLocationSearchMemoryDataSourceImpl mockMemoryDataSource;
   final tModel = LocationSearchModel(
     title: 'Kharkiv',
@@ -27,7 +27,7 @@ main() {
 
   setUp(() {
     mockRemoteDataSource = MockLocationSearchRemoteDataSourceImpl();
-    mockLocalDataSource = MockLocationSearchLocalDataSourceImpl();
+    mockLocalDataSource = MockLocationSearchDataBaseDataSourceImpl();
     mockMemoryDataSource = MockLocationSearchMemoryDataSourceImpl();
     dataProvider = LocationSearchDataProviderImpl(
       remoteDataSource: mockRemoteDataSource,
